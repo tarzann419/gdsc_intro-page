@@ -24,19 +24,23 @@ class _IntroPageState extends State<IntroPage> {
             controller: _controller,
           onPageChanged: (index){
 
+              setState(() {
+                onLastPage = (index == 2);
+                    print("$index, $onLastPage");
+              });
           },
           children: [
             Container(
               color: Colors.yellow,
-              child: Image.asset('assets/images/sleep.jpeg'),
+              child: Image.asset('assets/images/freak01.png'),
             ),
             Container(
               color: Colors.yellow,
-              child: Image.asset('assets/images/work.jpeg'),
+              child: Image.asset('assets/images/exercise-removebg-preview.png'),
             ),
             Container(
               color: Colors.yellow,
-              child: Image.asset('assets/images/exercise.jpeg'),
+              child: Image.asset('assets/images/sleep01.png'),
             )
           ],
         ),
@@ -46,9 +50,26 @@ class _IntroPageState extends State<IntroPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text("Skip"),
-                SmoothPageIndicator(controller: _controller, count: 3),
-                Icon(Icons.arrow_forward),
+                GestureDetector(onTap: (){
+                  Navigator.pushNamed(context, 'tasks');
+                },
+                child: Text("Skip", style: TextStyle(color: Colors.grey),)
+                ),
+
+                SmoothPageIndicator(
+                  controller: _controller,
+                  count: 3,
+                  effect: SwapEffect(
+                    dotColor: Colors.blue,
+                    activeDotColor: Colors.white,
+                    type: SwapType.yRotation,
+                  ),
+                ),
+
+                onLastPage ? GestureDetector(onTap: (){
+                  Navigator.pushNamed(context, 'intro');
+                },
+                child: Text("done")) : Icon(Icons.arrow_forward, color: Colors.grey,),
               ],
             ),
           )

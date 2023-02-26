@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_page/screens/intro_screen.dart';
+import 'package:intro_page/screens/tasks_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,12 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: Colors.blue,
       ),
-      home: IntroPage(),
+      initialRoute: 'intro',
+      routes: {
+        'intro': (context) => IntroPage(),
+        'tasks': (context) => TasksPage(),
+      },
+      // home: IntroPage(),
     );
   }
 }
